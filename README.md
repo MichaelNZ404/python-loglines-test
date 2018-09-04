@@ -11,4 +11,5 @@ total runtime is O(3n + nlogn) broken down as follows:
 - O(2n) to iterate through all logs, recursing on parents to print their children.
 
 We can optimize the print step by keeping a reference only to parent spans, which would change it from 2n to n.
+
 Memory usage is 2n, one for the sorted dict and another for trace dictionary.
