@@ -34,7 +34,7 @@ sorted_data = sorted(data, key=lambda k: datetime.strptime(time_fix(k['time']), 
 
 error_traces = {}
 
-# go through and group all spans from traces with errors by their trace id
+# go through and group all spans from traces with errors by their trace id, O(n)
 for log in sorted_data:
     if log['trace_id'] not in error_traces:
         error_traces[log['trace_id']] = {}
@@ -55,7 +55,7 @@ for log in sorted_data:
         trace[log['parent_span_id']]['children'].add(log['span_id'])
 
 
-# print
+# print - O(2n)
 for trace in error_traces.keys():
     for span_id in error_traces[trace]:
         logs = error_traces[trace][span_id]['logs']
